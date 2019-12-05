@@ -1,0 +1,25 @@
+# === General Stuff ===
+# System
+.DS_Store
+
+# Editor directories and files
+.idea
+.vscode
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+gen
+out
+
+
+# Node Modules
+node_modules
+
+# Node - Log Files
+npm-debug.log*
+
+# Tests Output Folder
+test/output

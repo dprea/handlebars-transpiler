@@ -1,0 +1,42 @@
+{
+  "name": "handlebars-transpile",
+  "description": "Transpile Handlebars Templates and JSON Content to Static HTML Files",
+  "version": "2.0.0",
+  "main": "dist/index.js",
+  "author": "Dustin Rea<drea@fusionalliance.com>",
+  "contributors": [
+    "Dustin Rea <drea@fusionalliance.com>",
+    "David Ragsdale <dragsdale@fusionalliance.com>",
+    "Andy McConnell <amcconell@fusionalliance.com>",
+    "Tim Gardner <tgardner@fusionalliance.com>"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "babel-it": "npx babel src -d dist",
+    "clean": "rimraf dist",
+    "make-dist": "mkdirp dist",
+    "build": "npm-run-all clean make-dist babel-it",
+    "watch": "onchange \"src/**\" -- npm run build",
+    "test": "mocha --opts test/mocha.opts"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "handlebars": "^4.5.3",
+    "import-fresh": "^3.2.1",
+    "junk": "^2.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "chai": "^4.1.2",
+    "cheerio": "^1.0.0-rc.2",
+    "del": "^3.0.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^5.1.1",
+    "npm-run-all": "^4.0.2",
+    "onchange": "^3.2.1",
+    "rimraf": "^2.6.1"
+  }
+}
