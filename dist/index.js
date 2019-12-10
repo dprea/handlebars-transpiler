@@ -61,7 +61,7 @@ var init = function init() {
     partialsDir: './partials',
     pagesDir: './pages',
     ext: '.html',
-    filters: []
+    excludes: []
   };
   var config = {
     outputDir: process.env.HBT_OUTPUT_DIR || defaults.outputDir,
@@ -70,10 +70,10 @@ var init = function init() {
     partialsDir: process.env.HBT_PARTIALS_DIR || defaults.partialsDir,
     pagesDir: process.env.HBT_PAGES_DIR || defaults.pagesDir,
     ext: process.env.HBT_EXT || defaults.ext,
-    filters: getFilters(process.env.HBT_FILTERS) || defaults.filters
+    excludes: getExcludes(process.env.HBT_EXCLUDES) || defaults.excludes
   };
 
-  function getFilters(filter) {
+  function getExcludes(filter) {
     if (!filter) return [];
     return filter.split(',');
   }
@@ -96,7 +96,7 @@ function filterDirectoryContents(contents, filter) {
 
   if (filter && filter.length > 0) {
     result = contents.filter(function (content) {
-      return filter.indexOf(content) !== -1;
+      return filter.indexOf(content) === -1;
     });
   }
 
@@ -191,7 +191,7 @@ var registerHelpers = function registerHelpers(config) {
 };
 
 var createPages = function createPages(config, partialData) {
-  var pages = getFilteredDirectory(config.pagesDir, config.filters); // Load Pages Files, Compile, Write
+  var pages = getFilteredDirectory(config.pagesDir, config.excludes); // Load Pages Files, Compile, Write
 
   pages.forEach(function (page) {
     // Capture the Filename to use as the HTML filename

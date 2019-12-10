@@ -44,7 +44,7 @@ const init = () => {
     partialsDir: './partials',
     pagesDir: './pages',
     ext: '.html',
-    filters: [],
+    excludes: [],
   };
 
   const config = {
@@ -54,10 +54,10 @@ const init = () => {
     partialsDir: process.env.HBT_PARTIALS_DIR || defaults.partialsDir,
     pagesDir: process.env.HBT_PAGES_DIR || defaults.pagesDir,
     ext: process.env.HBT_EXT || defaults.ext,
-    filters: getFilters(process.env.HBT_FILTERS) || defaults.filters,
+    excludes: getExcludes(process.env.HBT_EXCLUDES) || defaults.excludes,
   };
 
-  function getFilters(filter) {
+  function getExcludes(filter) {
     if (!filter) return [];
     return filter.split(',');
   }
@@ -78,10 +78,9 @@ function getFilteredDirectory(dir, filter) {
 function filterDirectoryContents(contents, filter) {
   let result = contents;
   if (filter && filter.length > 0) {
-    result = contents.filter(content => filter.indexOf(content) !== -1);
+    result = contents.filter(content => filter.indexOf(content) === -1);
   }
   debug(`filter ${filter}`);
-
   debug(result);
 
   return result;
@@ -166,7 +165,7 @@ const registerHelpers = function registerHelpers(config) {
 };
 
 const createPages = function createPages(config, partialData) {
-  const pages = getFilteredDirectory(config.pagesDir, config.filters);
+  const pages = getFilteredDirectory(config.pagesDir, config.excludes);
   // Load Pages Files, Compile, Write
   pages.forEach(function(page) {
     // Capture the Filename to use as the HTML filename

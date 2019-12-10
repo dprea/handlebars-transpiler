@@ -35,27 +35,31 @@ describe('Handlebars Transpile', () => {
     });
 
     // Fix how filters work, parse a comma delimited list
-    it('should only compile files in the filter array when it is provided', () => {
-      process.env.HBT_FILTERS = 'test-page.hbs';
+    it('should exclude files in the excludes array when it is provided', () => {
+      process.env.HBT_EXCLUDES = 'test-page.hbs';
 
       hbsTranspile();
-      const $ = cheerio.load(fs.readFileSync(`${process.env.HBT_OUTPUT_DIR}/test-page.html`));
-      const file = fs.existsSync(`${process.env.HBT_OUTPUT_DIR}/test-page-two.html`);
+      const $ = cheerio.load(fs.readFileSync(`${process.env.HBT_OUTPUT_DIR}/test-page-two.html`));
+      const file = fs.existsSync(`${process.env.HBT_OUTPUT_DIR}/test-page.html`);
+      const fileExists1 = fs.existsSync(`${process.env.HBT_OUTPUT_DIR}/test-page-no-partials.html`);
+      const fileExists2 = fs.existsSync(`${process.env.HBT_OUTPUT_DIR}/test-page-two.html`);
 
       expect($('#text1').text()).to.equal('Some Text');
       expect(file).to.be.false;
-      delete process.env.HBT_FILTERS;
+      expect(fileExists1).to.be.true;
+      expect(fileExists2).to.be.true;
+      delete process.env.HBT_EXCLUDES;
     });
 
-    // it('should not fail if the partials directory does not exist', () => {
-    //   process.env.HBT_PARTIALS_DIR = 'nothing/';
-    //   //config.filter = ['test-page-no-partials.hbs'];
+    it('should not fail if the partials directory does not exist', () => {
+      process.env.HBT_PARTIALS_DIR = 'nothing/';
+      //config.filter = ['test-page-no-partials.hbs'];
 
-    //   hbsTranspile();
-    //   const $ = cheerio.load(fs.readFileSync(`${process.env.HBT_OUTPUT_DIR}/test-page-no-partials.html`));
+      hbsTranspile();
+      const $ = cheerio.load(fs.readFileSync(`${process.env.HBT_OUTPUT_DIR}/test-page-no-partials.html`));
 
-    //   expect($('#text1').text()).to.equal('Some Text');
-    // });
+      expect($('#text1').text()).to.equal('Some Text');
+    });
   });
 
   afterEach(() => {

@@ -1,5 +1,5 @@
 {
-  "name": "handlebars-transpile",
+  "name": "handlebars-transpiler",
   "description": "Transpile Handlebars Templates and JSON Content to Static HTML Files",
   "version": "2.0.0",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "babel-it": "npx babel src -d dist",
+    "babel-it": "node ./node_modules/@babel/cli/bin/babel src -d dist",
     "clean": "rimraf dist",
     "make-dist": "mkdirp dist",
     "build": "npm-run-all clean make-dist babel-it",
