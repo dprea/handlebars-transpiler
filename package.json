@@ -11,6 +11,9 @@
     "Tim Gardner <tgardner@fusionalliance.com>"
   ],
   "license": "MIT",
+  "bin": {
+    "handlebars-transpile": "bin/handlebars-transpile.js"
+  },
   "scripts": {
     "babel-it": "node ./node_modules/@babel/cli/bin/babel src -d dist",
     "clean": "rimraf dist",
@@ -19,6 +22,11 @@
     "watch": "onchange \"src/**\" -- npm run build",
     "test": "mocha --opts test/mocha.opts"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dprea/handlebars-transpiler"
+  },
+  "homepage": "https://github.com/dprea/handlebars-transpiler#readme",
   "dependencies": {
     "debug": "^4.1.1",
     "handlebars": "^4.5.3",
