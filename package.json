@@ -1,7 +1,7 @@
 {
   "name": "handlebars-transpiler",
   "description": "Transpile Handlebars Templates and JSON Content to Static HTML Files",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "author": "Dustin Rea<drea@fusionalliance.com>",
   "contributors": [
@@ -12,7 +12,7 @@
   ],
   "license": "MIT",
   "bin": {
-    "handlebars-transpile": "bin/handlebars-transpile.js"
+    "handlebars-transpile": "bin/handlebars-transpiler.js"
   },
   "scripts": {
     "babel-it": "node ./node_modules/@babel/cli/bin/babel src -d dist",
