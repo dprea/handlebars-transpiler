@@ -52,7 +52,7 @@ var hbsTranspile = function hbsTranspile() {
   createPages(config, partialData);
 };
 
-var init = function init() {
+function init() {
   // NOTE: Get rid of input dir, there is no reason all of these must be in the same folder
   var defaults = {
     outputDir: './public',
@@ -79,7 +79,9 @@ var init = function init() {
   }
 
   return config;
-};
+}
+
+;
 
 function getFilteredDirectory(dir, filter) {
   var contents = walk(dir);
@@ -105,7 +107,7 @@ function filterDirectoryContents(contents, filter) {
   return result;
 }
 
-var walk = function walk(directory) {
+function walk(directory) {
   /**
    * Sanity Check: Handle Non Existent Directories by returning an empty array.
    * The Catch: module will not error out due to a non existent directory, however, if there are
@@ -137,9 +139,11 @@ var walk = function walk(directory) {
   return directoryWalker(_path["default"].resolve(directory)).map(function (item) {
     return item.substr(_path["default"].resolve(directory).length + _path["default"].sep.length);
   });
-};
+}
 
-var registerPartials = function registerPartials(config) {
+;
+
+function registerPartials(config) {
   var partials = getFilteredDirectory(config.partialsDir);
   var partialData = {}; // Load Partials into partialData Object to pass to main templates.
 
@@ -155,9 +159,11 @@ var registerPartials = function registerPartials(config) {
     _handlebars["default"].registerPartial(fileName, partialData[fileName].toString());
   });
   return partialData;
-};
+}
 
-var registerJSONContent = function registerJSONContent(config) {
+;
+
+function registerJSONContent(config) {
   var jsonContent = getFilteredDirectory(config.JSONDir); // Load JSON into the "Partials Object"
 
   var partialData = {};
@@ -171,9 +177,11 @@ var registerJSONContent = function registerJSONContent(config) {
     partialData[contentName] = JSON.parse(_fs["default"].readFileSync("".concat(config.JSONDir, "/").concat(content)));
   });
   return partialData;
-};
+}
 
-var registerHelpers = function registerHelpers(config) {
+;
+
+function registerHelpers(config) {
   var helpers = getFilteredDirectory(config.helpersDir); // Load Helpers
 
   helpers.forEach(function (helper) {
@@ -188,9 +196,11 @@ var registerHelpers = function registerHelpers(config) {
     debug("=== Registered Helper: ".concat(fileName, " ==="));
   });
   debug('=== Finished Helper Registration ===');
-};
+}
 
-var createPages = function createPages(config, partialData) {
+;
+
+function createPages(config, partialData) {
   var pages = getFilteredDirectory(config.pagesDir, config.excludes); // Load Pages Files, Compile, Write
 
   pages.forEach(function (page) {
@@ -217,13 +227,16 @@ var createPages = function createPages(config, partialData) {
     debug('=== Compiled: ', fileName + config.ext, ' ===');
   });
   debug('=== Finished Handlebars Build ===');
-};
+}
 
-var mkdir = function mkdir(onlyPath) {
+;
+
+function mkdir(onlyPath) {
   if (!_fs["default"].existsSync(onlyPath)) {
     _fs["default"].mkdirSync(onlyPath);
   }
-};
+}
 
+;
 var _default = hbsTranspile;
 exports["default"] = _default;

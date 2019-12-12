@@ -35,7 +35,7 @@ const hbsTranspile = () => {
   createPages(config, partialData);
 };
 
-const init = () => {
+function init() {
   // NOTE: Get rid of input dir, there is no reason all of these must be in the same folder
   const defaults = {
     outputDir: './public',
@@ -86,7 +86,7 @@ function filterDirectoryContents(contents, filter) {
   return result;
 }
 
-const walk = function walk(directory) {
+function walk(directory) {
   /**
    * Sanity Check: Handle Non Existent Directories by returning an empty array.
    * The Catch: module will not error out due to a non existent directory, however, if there are
@@ -115,7 +115,7 @@ const walk = function walk(directory) {
     });
 };
 
-const registerPartials = function registerPartials(config) {
+function registerPartials(config) {
   const partials = getFilteredDirectory(config.partialsDir);
 
   const partialData = {};
@@ -133,7 +133,7 @@ const registerPartials = function registerPartials(config) {
   return partialData;
 };
 
-const registerJSONContent = function registerJSONContent(config) {
+function registerJSONContent(config) {
   const jsonContent = getFilteredDirectory(config.JSONDir);
   // Load JSON into the "Partials Object"
   const partialData = {};
@@ -148,7 +148,7 @@ const registerJSONContent = function registerJSONContent(config) {
   return partialData;
 };
 
-const registerHelpers = function registerHelpers(config) {
+function registerHelpers(config) {
   let helpers = getFilteredDirectory(config.helpersDir);
   // Load Helpers
   helpers.forEach((helper) => {
@@ -164,7 +164,7 @@ const registerHelpers = function registerHelpers(config) {
   debug('=== Finished Helper Registration ===');
 };
 
-const createPages = function createPages(config, partialData) {
+function createPages(config, partialData) {
   const pages = getFilteredDirectory(config.pagesDir, config.excludes);
   // Load Pages Files, Compile, Write
   pages.forEach(function(page) {
@@ -189,7 +189,7 @@ const createPages = function createPages(config, partialData) {
   debug('=== Finished Handlebars Build ===');
 };
 
-const mkdir = function mkdir(onlyPath) {
+function mkdir(onlyPath) {
   if (!fs.existsSync(onlyPath)) {
     fs.mkdirSync(onlyPath);
   }
