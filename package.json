@@ -20,7 +20,7 @@
     "make-dist": "mkdirp dist",
     "build": "npm-run-all clean make-dist babel-it",
     "watch": "onchange \"src/**\" -- npm run build",
-    "test": "mocha --opts test/mocha.opts"
+    "test": "mocha --config test/mocharc.json"
   },
   "repository": {
     "type": "git",
@@ -42,9 +42,9 @@
     "cheerio": "^1.0.0-rc.2",
     "del": "^3.0.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^5.1.1",
+    "mocha": "^10.1.0",
     "npm-run-all": "^4.0.2",
-    "onchange": "^3.2.1",
+    "onchange": "^7.1.0",
     "rimraf": "^2.6.1"
   }
 }
